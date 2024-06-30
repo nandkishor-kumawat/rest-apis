@@ -5,6 +5,9 @@ const cors = require('cors');
 
 app.use(cors());
 
+app.get('/', (req, res) => {
+    res.send('Hello World');
+});
 
 app.use('/api/v1', require('./routes'));
 
