@@ -71,17 +71,17 @@ function fileToGenerativePart(file) {
     };
 }
 const genrateVisionProContent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const file = req.files['file'];
+    const file = req.files['files'];
     if (!file) {
         res.status(400).json({ error: "File is required" });
         return;
     }
-    const imagepart = fileToGenerativePart(file);
+    const imagepart = (Array.isArray(file) ? file : [file]).map(fileToGenerativePart);
     const model = genAI.getGenerativeModel({ model: MODELS.FLASH });
     // const { message } = req.body;
     const message = "You have given a picture, read the image and get the answer of the question available in the image and return the response if it is a coding question complete the code in cpp ";
     try {
-        const result = yield model.generateContent([message, imagepart]);
+        const result = yield model.generateContent([message, ...imagepart]);
         const response = result.response.text();
         res.status(200).json({ response });
     }
