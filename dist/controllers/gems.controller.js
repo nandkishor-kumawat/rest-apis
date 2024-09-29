@@ -82,6 +82,7 @@ const genrateVisionProContent = (req, res) => __awaiter(void 0, void 0, void 0, 
     }
     const imagepart = fileToGenerativePart(file.path, file.mimetype);
     const model = genAI.getGenerativeModel({ model: MODELS.FLASH });
+    fs_1.default.unlinkSync(file.path);
     // const { message } = req.body;
     const message = "You have given a picture, read the image and get the answer of the question available in the image and return the response if it is a coding question complete the code in cpp ";
     try {

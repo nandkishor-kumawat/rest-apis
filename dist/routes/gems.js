@@ -7,10 +7,12 @@ exports.gemsRouter = void 0;
 const express_1 = __importDefault(require("express"));
 const multer_1 = __importDefault(require("multer"));
 const controllers_1 = require("../controllers");
+const fs_1 = __importDefault(require("fs"));
 const router = express_1.default.Router();
 exports.gemsRouter = router;
 const storage = multer_1.default.diskStorage({
     destination: function (req, file, cb) {
+        fs_1.default.mkdirSync('uploads/', { recursive: true });
         cb(null, 'uploads/');
     },
     filename: function (req, file, cb) {

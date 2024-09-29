@@ -1,11 +1,13 @@
 import express from 'express';
 import multer from 'multer';
 import { genrateVisionProContent, sendMessage } from '../controllers';
+import fs from 'fs';
 
 const router = express.Router();
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
+        fs.mkdirSync('uploads/', { recursive: true });
         cb(null, 'uploads/');
     },
     filename: function (req, file, cb) {
