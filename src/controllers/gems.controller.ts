@@ -57,26 +57,25 @@ export const sendMessage = async (req: Request, res: Response) => {
     }
 }
 
-function fileToGenerativePart(path: string, mimeType: string) {
+function fileToGenerativePart(file: any) {
     return {
         inlineData: {
-            data: Buffer.from(fs.readFileSync(path)).toString("base64"),
-            mimeType
+            data: Buffer.from(file.data).toString("base64"),
+            mimeType: file.mimetype
         },
     };
 }
 
 export const genrateVisionProContent = async (req: Request, res: Response) => {
+    const file = req.files['file'];
 
-    const file = req.file;
     if (!file) {
         res.status(400).json({ error: "File is required" });
         return
     }
 
-    const imagepart = fileToGenerativePart(file.path, file.mimetype);
+    const imagepart = fileToGenerativePart(file);
     const model = genAI.getGenerativeModel({ model: MODELS.FLASH });
-    fs.unlinkSync(file.path);
     // const { message } = req.body;
     const message = "You have given a picture, read the image and get the answer of the question available in the image and return the response if it is a coding question complete the code in cpp ";
 

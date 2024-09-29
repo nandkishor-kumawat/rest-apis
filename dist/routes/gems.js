@@ -19,5 +19,5 @@ const storage = multer_1.default.diskStorage({
 });
 const upload = (0, multer_1.default)({ storage: storage });
 router.post('/text', controllers_1.sendMessage);
-router.post('/vision', upload.single('file'), controllers_1.genrateVisionProContent);
+router.post('/vision', controllers_1.genrateVisionProContent);
 //# sourceMappingURL=gems.js.map

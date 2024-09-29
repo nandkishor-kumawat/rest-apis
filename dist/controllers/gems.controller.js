@@ -8,12 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.genrateVisionProContent = exports.sendMessage = void 0;
-const fs_1 = __importDefault(require("fs"));
 const generative_ai_1 = require("@google/generative-ai");
 const config_1 = require("../config");
 const genAI = new generative_ai_1.GoogleGenerativeAI(config_1.GEMINI_API_KEY);
@@ -66,23 +62,22 @@ const sendMessage = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.sendMessage = sendMessage;
-function fileToGenerativePart(path, mimeType) {
+function fileToGenerativePart(file) {
     return {
         inlineData: {
-            data: Buffer.from(fs_1.default.readFileSync(path)).toString("base64"),
-            mimeType
+            data: Buffer.from(file.data).toString("base64"),
+            mimeType: file.mimetype
         },
     };
 }
 const genrateVisionProContent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const file = req.file;
+    const file = req.files['file'];
     if (!file) {
         res.status(400).json({ error: "File is required" });
         return;
     }
-    const imagepart = fileToGenerativePart(file.path, file.mimetype);
+    const imagepart = fileToGenerativePart(file);
     const model = genAI.getGenerativeModel({ model: MODELS.FLASH });
-    fs_1.default.unlinkSync(file.path);
     // const { message } = req.body;
     const message = "You have given a picture, read the image and get the answer of the question available in the image and return the response if it is a coding question complete the code in cpp ";
     try {

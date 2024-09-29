@@ -17,7 +17,7 @@ const upload = multer({ storage: storage });
 
 
 router.post('/text', sendMessage);
-router.post('/vision', upload.single('file'), genrateVisionProContent);
+router.post('/vision', genrateVisionProContent);
 
 
 export { router as gemsRouter };
