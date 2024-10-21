@@ -1,3 +1,4 @@
+import { authRouter } from "./auth";
 import { gemsRouter } from "./gems";
 import { quotesRouter } from "./quotes";
 
@@ -10,5 +11,6 @@ router.get('/', (req, res) => {
 
 router.use('/quotes', quotesRouter);
 router.use('/gems', gemsRouter);
+router.use('/auth', authRouter);
 
 export { router as mainRouter };
