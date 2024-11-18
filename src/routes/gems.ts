@@ -1,6 +1,6 @@
 import express from 'express';
 import multer from 'multer';
-import { genrateVisionProContent, sendMessage } from '../controllers';
+import { genrateVisionProContent, sendMessage, } from '../controllers';
 
 const router = express.Router();
 

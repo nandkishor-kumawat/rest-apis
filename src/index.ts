@@ -13,7 +13,9 @@ const port = process.env.PORT || 3000;
 const app = express();
 
 app.use(imageUpload());
-app.use(cors());
+app.use(cors({
+    origin: '*',
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
