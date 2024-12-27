@@ -17,4 +17,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./quote.controller"), exports);
 __exportStar(require("./gems.controller"), exports);
 __exportStar(require("./auth.controller"), exports);
+__exportStar(require("./upload.controller"), exports);
 //# sourceMappingURL=index.js.map
