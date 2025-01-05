@@ -14,8 +14,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./quote.controller"), exports);
-__exportStar(require("./auth.controller"), exports);
-__exportStar(require("./upload.controller"), exports);
-__exportStar(require("./chit-chat.controller"), exports);
+__exportStar(require("./prompt"), exports);
 //# sourceMappingURL=index.js.map

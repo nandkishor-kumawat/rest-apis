@@ -1,8 +1,8 @@
 import { authRouter } from "./auth";
-import { gemsRouter } from "./gems";
 import { quotesRouter } from "./quotes";
 import express from 'express';
 import { uploadRouter } from "./upload";
+import { chitChatRouter } from "./chit-chat.router";
 
 const router = express.Router();
 
@@ -11,8 +11,8 @@ router.get('/', (req, res) => {
 })
 
 router.use('/quotes', quotesRouter);
-router.use('/gems', gemsRouter);
 router.use('/auth', authRouter);
 router.use('/file', uploadRouter)
+router.use('/chit-chat', chitChatRouter)
 
 export { router as mainRouter };
